@@ -1,0 +1,21 @@
+logging_config:
+  version: 1
+  formatters:
+    default:
+      format: "%(message)s"
+  handlers:
+    console:
+      class: logging.StreamHandler
+      level: DEBUG
+      formatter: default
+      stream: ext://sys.stdout
+  root:
+    level: DEBUG
+    handlers: [console]
+
+plugins_config:
+  pbi:
+    access_token: see the README for how to generate an access token
+    organisation: glasswall
+    project: Glasswall Cloud
+    email: sgibson@glasswallsolutions.com
