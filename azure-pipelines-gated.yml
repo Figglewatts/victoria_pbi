@@ -3,7 +3,7 @@ pool: Hosted Ubuntu 1604
 steps:
 - script: |
     python -m pip install --upgrade pip
-    pip install pylint pytest pytest-cov pytest-azurepipelines
+    python -m pip install pylint pytest pytest-cov pytest-azurepipelines
   displayName: Install tools
 - script: pip install -e .
   displayName: Install package

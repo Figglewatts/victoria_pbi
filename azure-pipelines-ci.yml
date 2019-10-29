@@ -5,7 +5,7 @@ trigger:
 steps:
 - script: |
     python -m pip install --upgrade pip pipenv
-    pip install pipenv setuptools wheel twine
+    python -m pip install pipenv setuptools wheel twine
   displayName: Install tools
 - script: pipenv install --dev
   displayName: Install dependencies
