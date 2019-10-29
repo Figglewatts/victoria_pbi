@@ -1,6 +1,9 @@
 name: $(BuildDefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
 pool: Hosted Ubuntu 1604
 steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: "3.7"
 - script: |
     python -m pip install --upgrade pip
     python -m pip install pylint pytest pytest-cov pytest-azurepipelines
