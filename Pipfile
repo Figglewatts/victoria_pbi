@@ -7,6 +7,9 @@ verify_ssl = true
 pylint = "*"
 yapf = "*"
 pytest = "*"
+setuptools = "*"
+wheel = "*"
+twine = "*"
 
 [packages]
 victoria = {git = "https://glasswall@dev.azure.com/glasswall/Glasswall%20Cloud/_git/Glasswall.SRE.Victoria",ref = "e032d95d28eacef2741493e3b98e76f5cc15ceb6"}

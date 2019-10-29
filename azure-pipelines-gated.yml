@@ -1,0 +1,14 @@
+name: $(BuildDefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
+pool: Hosted Ubuntu 1604
+container: python:3.7-alpine
+steps:
+- script: |
+    python -m pip install --upgrade pip
+    pip install pylint pytest pytest-cov pytest-azurepipelines
+  displayName: Install tools
+- script: pip install -e .
+  displayName: Install package
+- script: pylint --disable=C,W,R victoria_pbi
+  displayName: Lint Python package
+- script: pytest tests/ --cov victoria_pbi --cov-report html
+  displayName: Test Python package
