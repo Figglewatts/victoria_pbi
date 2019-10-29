@@ -1,6 +1,5 @@
 name: $(BuildDefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
 pool: Hosted Ubuntu 1604
-container: python:3.7-alpine
 trigger:
 - master
 steps:
