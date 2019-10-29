@@ -6,19 +6,21 @@ Author:
     Sam Gibson <sgibson@glasswallsolutions.com
 """
 import logging
-from typing import List
+from typing import List, Iterable
 
 import click
+import colorama
+from tabulate import tabulate
 
 from .config import PBIConfig
-from .pbi import AzureDevOpsAPI, AzureDevOpsServiceError
+from .pbi import AzureDevOpsAPI, AzureDevOpsServiceError, WorkItemContainer
 
 
 @click.group()
 @click.pass_obj
 def pbi(cfg: PBIConfig):
     """Manipulate Azure DevOps PBIs."""
-    pass
+    colorama.init()
 
 
 @pbi.command()
@@ -27,8 +29,7 @@ def pbi(cfg: PBIConfig):
 def get(cfg: PBIConfig, id: List[int]):
     """Get work item(s) by ID."""
     conn = AzureDevOpsAPI(cfg)
-    for work_item in conn.get_work_items(id):
-        print(work_item)
+    print_work_items(conn.get_work_items(id))
 
 
 @pbi.command()
@@ -44,8 +45,7 @@ def ls(cfg: PBIConfig, user: str):
         user += "@" + cfg.email.split("@")[1]
 
     conn = AzureDevOpsAPI(cfg)
-    for work_item in conn.get_user_pbis(user):
-        print(work_item)
+    print_work_items(conn.get_user_pbis(user))
 
 
 @pbi.command()
@@ -104,3 +104,31 @@ def mv(cfg: PBIConfig, id: List[int], column: str):
                 f"Could not move work item: column '{column}' did not exist")
         else:
             logging.error(err)
+
+
+def print_work_items(work_items: Iterable[WorkItemContainer]):
+    headers = ["ID", "Type", "Title", "State", "Assignee"]
+    table = []
+    for work_item in work_items:
+        item_type = "PBI" if work_item.work_type == "Product Backlog Item" \
+            else work_item.work_type
+
+        # figure out which colour to print the state as
+        state_colour = colorama.Fore.WHITE
+        if work_item.state == "New" or work_item.state == "Approved":
+            state_colour = colorama.Fore.LIGHTWHITE_EX
+        elif work_item.board_column == "On Hold":
+            state_colour = colorama.Fore.RED
+        elif work_item.state == "In Development":
+            state_colour = colorama.Fore.YELLOW
+        elif work_item.state == "Validation":
+            state_colour = colorama.Fore.BLUE
+        elif work_item.state == "Done":
+            state_colour = colorama.Fore.GREEN
+        state = f"{state_colour}● {colorama.Style.RESET_ALL}{work_item.board_column}"
+
+        table.append([
+            f"#{work_item.id_number}", item_type, work_item.title, state,
+            work_item.assigned_to
+        ])
+    print(tabulate(table, headers, tablefmt="plain"))

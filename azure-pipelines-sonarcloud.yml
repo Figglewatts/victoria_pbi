@@ -1,0 +1,26 @@
+name: $(BuildDefinitionName)-$(Date:yyyyMMdd)$(Rev:.r)
+pool: Hosted Ubuntu 1604
+container: python:3.7-alpine
+# we set this to true in case any tests fail, we still wanna do SonarCloud
+continueOnError: true 
+steps:
+- script: |
+    python -m pip install --upgrade pip
+    pip install pylint pytest pytest-cov pytest-azurepipelines
+  displayName: Install tools
+- script: pip install -e .
+  displayName: Install package
+- script: pytest tests/ --cov victoria_pbi --cov-report html
+  displayName: Test Python package
+- task: SonarCloudPrepare@1
+  displayName: Prepare analysis on SonarCloud
+  inputs:
+    SonarCloud: SonarCloud connection
+    organization: glasswall-cloud-key-a42w31
+    projectKey: $(Build.Repository.Name)
+    projectName: $(Build.Repository.Name)
+    extraProperties: |
+      "sonar.python.coverage.reportPaths=$(Agent.BuildDirectory)/coverage.xml"
+      "sonar.python.xunit.reportPath=$(Agent.BuildDirectory)/test-output.xml"
+- task: SonarCloudAnalyze@1
+  displayName: Run code analysis on SonarCloud

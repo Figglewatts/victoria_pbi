@@ -6,6 +6,10 @@ verify_ssl = true
 [dev-packages]
 pylint = "*"
 yapf = "*"
+pytest = "*"
+setuptools = "*"
+wheel = "*"
+twine = "*"
 
 [packages]
 victoria = {git = "https://glasswall@dev.azure.com/glasswall/Glasswall%20Cloud/_git/Glasswall.SRE.Victoria",ref = "e032d95d28eacef2741493e3b98e76f5cc15ceb6"}
@@ -13,6 +17,8 @@ click = "==7.0"
 marshmallow = "==3.2.1"
 azure-devops = "==5.1.0b4"
 victoria-pbi = {editable = true,path = "."}
+tabulate = "*"
+colorama = "*"
 
 [requires]
 python_version = "3.7"
