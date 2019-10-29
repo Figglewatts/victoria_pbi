@@ -5,14 +5,13 @@ steps:
   inputs:
     versionSpec: "3.7"
 - script: |
-    python -m pip install --upgrade pip
-    python -m pip install pylint pytest pytest-cov pytest-azurepipelines
+    python -m pip install --upgrade pip pipenv
   displayName: Install tools
-- script: pip install -e .
-  displayName: Install package
-- script: pylint --disable=C,W,R victoria_pbi
+- script: pipenv install --dev
+  displayName: Install dependencies
+- script: pipenv run pylint --disable=C,W,R victoria_pbi
   displayName: Lint Python package
-- script: pytest tests/ --cov victoria_pbi --cov-report html
+- script: pipenv run pytest tests/ --cov victoria_pbi --cov-report html
   displayName: Test Python package
 - task: SonarCloudPrepare@1
   displayName: Prepare analysis on SonarCloud
