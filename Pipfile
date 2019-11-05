@@ -3,6 +3,11 @@ name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
 
+[[source]]
+name = "sre"
+url = "$SRE_PACKAGE_FEED"
+verify_ssl = true
+
 [dev-packages]
 pylint = "*"
 yapf = "*"
@@ -10,9 +15,10 @@ pytest = "*"
 setuptools = "*"
 wheel = "*"
 twine = "*"
+pipenv-setup = "*"
 
 [packages]
-victoria = {git = "https://glasswall@dev.azure.com/glasswall/Glasswall%20Cloud/_git/Glasswall.SRE.Victoria",ref = "e032d95d28eacef2741493e3b98e76f5cc15ceb6"}
+victoria = {version = "==0.1",index = "sre"}
 click = "==7.0"
 marshmallow = "==3.2.1"
 azure-devops = "==5.1.0b4"
