@@ -8,10 +8,12 @@ The Victoria PBI plugin is used for manipulating Azure DevOps PBIs.
 - Python 3.7+
 - Pip
 - Victoria
+- SRE package feed set up
+  - https://dev.azure.com/glasswall/Glasswall%20Cloud/_wiki/wikis/Service%20Reliability%20Engineering%20Wiki/393/Using-SRE-Python-Packages
 
 ### Installation
 ```terminal
-$ pip install git+https://glasswall@dev.azure.com/glasswall/Glasswall%20Cloud/_git/Glasswall.SRE.Victoria.PBI
+$ pip install victoria_pbi -i $SRE_PACKAGE_FEED
 ```
 
 ### Config
