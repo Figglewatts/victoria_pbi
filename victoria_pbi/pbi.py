@@ -71,6 +71,17 @@ class WorkItemContainer:
         return f"#{self.id_number} ({self.work_type}):" + \
             f" {self.title}, {self.assigned_to} => {self.board_column}"
 
+    def __eq__(self, other):
+        if isinstance(self, other.__class__):
+            return self.id_number == other.id_number \
+                and self.title == other.title \
+                and self.work_type == other.work_type \
+                and self.assigned_to == other.assigned_to \
+                and self.state == other.state \
+                and self.board_column == other.board_column \
+                and self.work_item == other.work_item
+        return False
+
 
 class AzureDevOpsAPI:
     """A connection to the Azure DevOps API.
@@ -187,7 +198,6 @@ class AzureDevOpsAPI:
                     AND [System.State]<>'Removed'
                     AND ([System.WorkItemType]='Product Backlog Item'
                         OR [System.WorkitemType]='Bug')"""))
-
         if len(result.work_items) == 0:
             print(f"Could not find any work items for user '{email}'."
                   " Did the user exist?")

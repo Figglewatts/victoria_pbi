@@ -37,3 +37,10 @@ class PBIConfig:
         self.organisation = organisation
         self.project = project
         self.email = email
+
+    def __eq__(self, other):
+        if isinstance(self, other.__class__):
+            return self.access_token == other.access_token \
+                and self.organisation == other.organisation \
+                and self.project == other.project \
+                and self.email == other.email
