@@ -20,13 +20,13 @@ twine = "*"
 pipenv-setup = "*"
 
 [packages]
-victoria = {version = "==0.1",index = "sre"}
 click = "==7.0"
 marshmallow = "==3.2.1"
 azure-devops = "==5.1.0b4"
 victoria-pbi = {editable = true,path = "."}
 tabulate = "*"
 colorama = "*"
+victoria = {index = "sre",version = "*"}
 
 [requires]
 python_version = "3.7"
