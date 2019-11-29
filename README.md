@@ -75,7 +75,7 @@ Commands:
 ## Development
 
 ### Prerequisites
-- Python 3.x
+- Python 3.7
 - Pipenv
 
 ### Quick start

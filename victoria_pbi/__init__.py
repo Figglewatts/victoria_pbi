@@ -1,4 +1,4 @@
-"""config.py
+"""victoria_pbi
 
 A Victoria plugin to manipulate Azure DevOps PBIs.
 

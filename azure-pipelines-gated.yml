@@ -5,6 +5,15 @@ resources:
   - repository: templates
     type: git
     name: Glasswall.Pipelines.Templates
+  - repository: this
+    type: git
+    name: Glasswall.SRE.Victoria.PBI
+    trigger:
+      branches:
+      - master
+    pr: 
+      branches:
+      - master
 jobs:
 - template: Python/template-gated.yml@templates
   parameters:
