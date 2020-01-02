@@ -14,7 +14,7 @@ setup(
         "colorama"
     ],
     name="victoria_pbi",
-    version="0.2.0",
+    version="#{TAG_NAME}#",
     description="Victoria plugin to manipulate Azure DevOps PBIs",
     author="Sam Gibson",
     author_email="sgibson@glasswallsolutions.com",
