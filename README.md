@@ -1,5 +1,9 @@
 # victoria_pbi
 
+**Note:** This repository is quite old, and was mainly used as a demonstration
+of the power of Victoria. It is no longer supported, and there are no guarantees
+about functionality.
+
 The Victoria PBI plugin is used for manipulating Azure DevOps PBIs.
 
 ## Usage
